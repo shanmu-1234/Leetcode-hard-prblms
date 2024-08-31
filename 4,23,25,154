@@ -1,0 +1,80 @@
+QUESTION NO : 4
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        
+        nums3=nums1+nums2
+        nums3.sort()
+        if len(nums3)%2!=0:
+            return nums3[len(nums3)//2]
+        k=0
+        k=(nums3[len(nums3)//2]+nums3[(len(nums3)//2)-1])/2
+        return k 
+
+
+QUESTION NO : 23
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+
+        arr=[]
+        kk=None
+
+        for i in range(len(lists)):
+            arr1=lists[i]
+            while arr1 is not None:
+                arr.append(arr1.val)
+                arr1=arr1.next
+
+        arr.sort(reverse=True)
+        for i in arr:
+            kk=ListNode(i,kk)
+        return kk
+
+
+QUESTION NO : 25
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+
+        stack=[]
+        l2=None
+
+        while head is not None:
+            stack.append(head.val)
+            head=head.next
+
+        stack3=[]   
+        while len(stack)>=k:
+            for i in range(k-1,-1,-1):
+                stack3.append(stack[i])
+            for i in range(k-1,-1,-1):
+                stack.remove(stack[0])
+                
+        stack4=stack3+stack
+        stack4.reverse()
+        for j in stack4:
+            l2=ListNode(j,l2)
+        return l2
+
+
+
+QUESTION NO : 154
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        
+        min_number=min(nums)
+        for i in range(len(nums)):
+            k=nums[0]
+            nums.remove(nums[0])
+            nums.insert(len(nums),k)
+            if nums[0]==min_number:
+                return nums[0]
+                break 
